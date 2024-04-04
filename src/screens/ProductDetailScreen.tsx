@@ -12,6 +12,8 @@ import {
   SafeAreaView,
   Button,
   ToastAndroid,
+  View,
+  StatusBar,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -146,6 +148,8 @@ const ProductDetailScreen = ({ route, navigation }: { route: any; navigation: an
 
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <View style={{ marginTop: StatusBar.currentHeight }} />
+
       <ScrollView style={styles.container}>
         <Header
           hasTitle={false}

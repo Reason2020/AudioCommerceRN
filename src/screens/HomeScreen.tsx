@@ -84,6 +84,8 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     <BottomSheetModalProvider>
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar animated backgroundColor={colors.white} barStyle={'dark-content'} />
+        <View style={{ marginTop: StatusBar.currentHeight }} />
+
         <ScrollView style={styles.container}>
           <Header
             hasTitle={true}

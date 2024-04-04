@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Provider } from 'react-redux';
-import { SafeAreaView, StyleSheet, Text } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -13,13 +13,15 @@ import SignupScreen from './src/screens/SignupScreen';
 import SearchScreen from './src/screens/SearchScreen';
 import ProductDetailScreen from './src/screens/ProductDetailScreen';
 import CartScreen from './src/screens/CartScreen';
+import CustomContainer from './src/components/CustomContainer';
 
 const Stack = createNativeStackNavigator();
 
 function App(): React.JSX.Element {
   return (
-    <Provider store={store}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Provider store={store}>
+        <StatusBar translucent={true} backgroundColor={'transparent'} />
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
@@ -34,8 +36,8 @@ function App(): React.JSX.Element {
             <Stack.Screen name="Cart" component={CartScreen} />
           </Stack.Navigator>
         </NavigationContainer>
-      </GestureHandlerRootView>
-    </Provider>
+      </Provider>
+    </GestureHandlerRootView>
   );
 }
 
