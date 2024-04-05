@@ -12,7 +12,9 @@ type IconifiedInputFieldProps = {
   iconType: 'antdesign' | 'feather';
   showBorder: boolean;
   value: string;
+  secure?: boolean;
   handleChange: (newValue: string) => void;
+  handleBlur?: (e: any) => void;
 };
 
 const IconifiedInputField: React.FC<IconifiedInputFieldProps> = ({
@@ -22,6 +24,8 @@ const IconifiedInputField: React.FC<IconifiedInputFieldProps> = ({
   showBorder,
   value,
   handleChange,
+  secure = false,
+  handleBlur,
 }): React.JSX.Element => {
   return (
     <View
@@ -42,6 +46,8 @@ const IconifiedInputField: React.FC<IconifiedInputFieldProps> = ({
         onChangeText={handleChange}
         placeholder={placeholderText}
         placeholderTextColor={colors.grey}
+        secureTextEntry={secure}
+        onBlur={handleBlur}
       />
     </View>
   );

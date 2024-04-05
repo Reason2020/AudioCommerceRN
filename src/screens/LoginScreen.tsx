@@ -9,6 +9,8 @@ import CustomButton from '../components/CustomButton';
 import CustomizedLink from '../components/CustomizedLink';
 import IconifiedInputField from '../components/IconifiedInputField';
 import AuthScreenBackground from '../components/AuthScreenBackground';
+import CustomContainer from '../components/CustomContainer';
+import ErrorField from '../components/ErrorField';
 
 const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => {
   const handleLoginPress = (values: any) => {
@@ -24,7 +26,7 @@ const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => 
       .min(8, 'Must be more than 8 characters'),
   });
 
-  const { values, errors, handleBlur, touched, handleChange } = useFormik({
+  const { values, errors, handleBlur, touched, handleChange, isValid } = useFormik({
     initialValues: {
       email: '',
       password: '',
@@ -43,22 +45,27 @@ const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => 
             iconType="antdesign"
             showBorder={false}
             value={values.email}
-            handleChange={() => handleChange('email')}
+            handleChange={handleChange('email')}
+            handleBlur={handleBlur('email')}
           />
+          {touched.email && errors.email && <ErrorField errorText={errors.email} />}
           <IconifiedInputField
             iconName="lock"
             placeholderText="Password"
             iconType="feather"
             showBorder={false}
             value={values.password}
-            handleChange={() => handleChange('password')}
+            secure
+            handleChange={handleChange('password')}
+            handleBlur={handleBlur('password')}
           />
+          {touched.password && errors.password && <ErrorField errorText={errors.password} />}
           <Text style={styles.forgotPasswordText}>Forgot Password</Text>
           <CustomButton
             iconName=""
             iconType=""
             buttonText="Sign In"
-            handleButtonPress={() => handleLoginPress(values)}
+            handleButtonPress={() => (isValid ? handleLoginPress(values) : console.log('Error'))}
           />
 
           <CustomizedLink
