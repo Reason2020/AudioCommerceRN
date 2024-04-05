@@ -6,6 +6,10 @@ import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { colors } from '../constants/colors';
+import CustomContainer from './CustomContainer';
+import { useSelector } from 'react-redux';
+import { CartItemsListType } from '../redux/reducers/cartSlice';
+import { RootState } from '../redux/store';
 
 type HeaderProps = {
   hasTitle: Boolean;
@@ -26,6 +30,8 @@ const Header: React.FC<HeaderProps> = ({
   handleLeftIconPress,
   handleRightIconPress,
 }): React.JSX.Element => {
+  const cartItems: CartItemsListType = useSelector((state: RootState) => state.cartItems);
+
   return (
     <View style={styles.container}>
       <Pressable onPress={handleLeftIconPress}>
@@ -42,7 +48,10 @@ const Header: React.FC<HeaderProps> = ({
         {rightIconName === 'user' ? (
           <Image source={require('../../images/userProfile.png')} style={styles.image} />
         ) : rightIconName === 'shopping-cart' ? (
-          <Feather name="shopping-cart" size={20} color={colors.black} />
+          <CustomContainer>
+            <Feather name="shopping-cart" size={20} color={colors.black} />
+            {cartItems.length > 0 && <View style={styles.redCircle} />}
+          </CustomContainer>
         ) : (
           <Feather name="trash-2" size={20} color={colors.black} />
         )}
@@ -70,5 +79,14 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
+  },
+  redCircle: {
+    position: 'absolute',
+    top: -5,
+    right: -5,
+    height: 14,
+    width: 14,
+    borderRadius: 7,
+    backgroundColor: 'red',
   },
 });
