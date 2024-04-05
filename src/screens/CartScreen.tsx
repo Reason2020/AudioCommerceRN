@@ -14,6 +14,7 @@ import {
   removeItemFromCart,
   removeAllItemsFromCart,
   CartItemType,
+  CartItemsListType,
 } from '../redux/reducers/cartSlice';
 import CustomButton from '../components/CustomButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -21,7 +22,7 @@ import Header from '../components/Header';
 import { colors } from '../constants/colors';
 
 const CartScreen = () => {
-  const cartItems = useSelector((state: RootState) => state.cartItems);
+  const cartItems: CartItemsListType = useSelector((state: RootState) => state.cartItems);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -54,57 +55,63 @@ const CartScreen = () => {
           handleRightIconPress={() => dispatch(removeAllItemsFromCart())}
         />
 
-        {cartItems.map(cartItem => {
-          return (
-            <CustomContainer row flex vPadding={20} hPadding={15} style={{ gap: 15 }}>
-              {/* image container */}
-              <CustomContainer
-                color={colors.lightGrey1}
-                borderRadius={15}
-                vPadding={10}
-                hPadding={10}
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Image
-                  source={{
-                    uri: cartItem.image,
-                  }}
-                  style={styles.image}
-                />
-              </CustomContainer>
+        {cartItems.length > 0 ? (
+          cartItems.map(cartItem => {
+            return (
+              <CustomContainer row flex vPadding={20} hPadding={15} style={{ gap: 15 }}>
+                {/* image container */}
+                <CustomContainer
+                  color={colors.lightGrey1}
+                  borderRadius={15}
+                  vPadding={10}
+                  hPadding={10}
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Image
+                    source={{
+                      uri: cartItem.image,
+                    }}
+                    style={styles.image}
+                  />
+                </CustomContainer>
 
-              <CustomContainer flex>
-                <Text style={styles.titleText}>{cartItem.title}</Text>
-                <Text style={styles.priceText}>USD {cartItem.price}</Text>
+                <CustomContainer flex>
+                  <Text style={styles.titleText}>{cartItem.title}</Text>
+                  <Text style={styles.priceText}>USD {cartItem.price}</Text>
 
-                {/* action buttons */}
-                <CustomContainer row justifyContent="space-between">
-                  {/* counter container */}
-                  <CustomContainer row alignItems="center" style={{ gap: 20 }}>
-                    <Pressable
-                      style={styles.counterButtons}
-                      onPress={() => handleDecrementPress(cartItem)}
-                    >
-                      <AntDesign name="minus" size={20} color={colors.black} />
-                    </Pressable>
-                    <Text style={styles.countText}>{cartItem.count}</Text>
-                    <Pressable
-                      style={styles.counterButtons}
-                      onPress={() => dispatch(incrementCountOfItemInCart(cartItem.id))}
-                    >
-                      <AntDesign name="plus" size={20} color={colors.black} />
+                  {/* action buttons */}
+                  <CustomContainer row justifyContent="space-between">
+                    {/* counter container */}
+                    <CustomContainer row alignItems="center" style={{ gap: 20 }}>
+                      <Pressable
+                        style={styles.counterButtons}
+                        onPress={() => handleDecrementPress(cartItem)}
+                      >
+                        <AntDesign name="minus" size={20} color={colors.black} />
+                      </Pressable>
+                      <Text style={styles.countText}>{cartItem.count}</Text>
+                      <Pressable
+                        style={styles.counterButtons}
+                        onPress={() => dispatch(incrementCountOfItemInCart(cartItem.id))}
+                      >
+                        <AntDesign name="plus" size={20} color={colors.black} />
+                      </Pressable>
+                    </CustomContainer>
+
+                    <Pressable onPress={() => dispatch(removeItemFromCart(cartItem.id))}>
+                      <Feather name="trash-2" size={20} color={colors.black} />
                     </Pressable>
                   </CustomContainer>
-
-                  <Pressable onPress={() => dispatch(removeItemFromCart(cartItem.id))}>
-                    <Feather name="trash-2" size={20} color={colors.black} />
-                  </Pressable>
                 </CustomContainer>
               </CustomContainer>
-            </CustomContainer>
-          );
-        })}
+            );
+          })
+        ) : (
+          <CustomContainer flex justifyContent="center" alignItems="center">
+            <Text>No Products to Display in Cart</Text>
+          </CustomContainer>
+        )}
       </ScrollView>
 
       <CustomContainer color={colors.white} hPadding={15} vPadding={15} style={{ gap: 15 }}>

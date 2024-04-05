@@ -70,7 +70,9 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
             iconName=""
             iconType=""
             buttonText="Sign Up"
-            handleButtonPress={handleSignUpScreen}
+            handleButtonPress={() =>
+              isValid ? handleSignUpScreen() : console.log('Error Signing up')
+            }
           />
 
           <View style={styles.oAuthButtonsContainer}>
