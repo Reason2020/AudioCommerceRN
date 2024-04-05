@@ -11,6 +11,8 @@ type IconifiedInputFieldProps = {
   placeholderText: string;
   iconType: 'antdesign' | 'feather';
   showBorder: boolean;
+  value: string;
+  handleChange: (newValue: string) => void;
 };
 
 const IconifiedInputField: React.FC<IconifiedInputFieldProps> = ({
@@ -18,9 +20,9 @@ const IconifiedInputField: React.FC<IconifiedInputFieldProps> = ({
   placeholderText,
   iconType,
   showBorder,
+  value,
+  handleChange,
 }): React.JSX.Element => {
-  const [inputText, setInputText] = useState('');
-
   return (
     <View
       style={[
@@ -36,8 +38,8 @@ const IconifiedInputField: React.FC<IconifiedInputFieldProps> = ({
         )}
       </View>
       <TextInput
-        value={inputText}
-        onChangeText={newValue => setInputText(newValue)}
+        value={value}
+        onChangeText={handleChange}
         placeholder={placeholderText}
         placeholderTextColor={colors.grey}
       />

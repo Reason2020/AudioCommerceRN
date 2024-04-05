@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
@@ -17,6 +17,8 @@ import { useGetAllProductsQuery } from '../redux/services/productsApi';
 const lastSearchData = ['TMA2 Wireless', 'Cable', 'Headphones'];
 
 const SearchScreen = ({ navigation }: { navigation: any }) => {
+  const [searchText, setSearchText] = useState('');
+
   const { data, isLoading, error } = useGetAllProductsQuery();
 
   const handleLeftIconPress = () => {
@@ -44,6 +46,8 @@ const SearchScreen = ({ navigation }: { navigation: any }) => {
           iconType="feather"
           placeholderText="Search headphone"
           showBorder={true}
+          value={searchText}
+          handleChange={newSearchText => setSearchText(newSearchText)}
         />
 
         <CustomContainer vPadding={15} hPadding={15} vMargin={10}>
