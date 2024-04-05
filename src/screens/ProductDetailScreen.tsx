@@ -221,12 +221,7 @@ const ProductDetailScreen = ({ route, navigation }: { route: any; navigation: an
           )}
         </CustomContainer>
       </ScrollView>
-      <CustomContainer
-        hPadding={15}
-        vPadding={10}
-        width={'100%'}
-        style={{ position: 'absolute', bottom: 20 }}
-      >
+      <CustomContainer hPadding={15} vPadding={10}>
         <CustomButton buttonText="Add to Cart" handleButtonPress={handleAddToCartPress} />
       </CustomContainer>
     </SafeAreaView>
