@@ -58,7 +58,14 @@ const CartScreen = () => {
         {cartItems.length > 0 ? (
           cartItems.map(cartItem => {
             return (
-              <CustomContainer row flex vPadding={20} hPadding={15} style={{ gap: 15 }}>
+              <CustomContainer
+                row
+                flex
+                vPadding={20}
+                hPadding={15}
+                style={{ gap: 15 }}
+                key={cartItem.id}
+              >
                 {/* image container */}
                 <CustomContainer
                   color={colors.lightGrey1}

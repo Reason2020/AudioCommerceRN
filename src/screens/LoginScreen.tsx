@@ -14,8 +14,7 @@ import ErrorField from '../components/ErrorField';
 
 const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => {
   const handleLoginPress = (values: any) => {
-    console.log('Values: ', values);
-    // navigation.navigate('Home');
+    navigation.navigate('Home');
   };
 
   const validationSchema = Yup.object({
