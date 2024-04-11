@@ -1,6 +1,5 @@
 import React from 'react';
 
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import { Dimensions, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { colors } from '../constants/colors';

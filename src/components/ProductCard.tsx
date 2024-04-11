@@ -1,13 +1,11 @@
 import React from 'react';
 
-import Entypo from 'react-native-vector-icons/Entypo';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import { Dimensions, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
+import images from '../../images';
 import { colors } from '../constants/colors';
 import { ProductType } from '../constants/dummyData';
 import { useNavigation } from '@react-navigation/native';
-import images from '../../images';
 
 const ProductCard = ({ title, price, rating, image, category, description, id }: ProductType) => {
   const navigation = useNavigation();

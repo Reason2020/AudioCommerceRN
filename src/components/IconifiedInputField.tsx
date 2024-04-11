@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 
-import Feather from 'react-native-vector-icons/Feather';
 import { Image, StyleSheet, TextInput, View } from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
-import { colors } from '../constants/colors';
 import images from '../../images';
+import { colors } from '../constants/colors';
 
 type IconifiedInputFieldProps = {
   iconName: 'Mail' | 'Lock' | 'Search';

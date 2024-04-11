@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 
-import Entypo from 'react-native-vector-icons/Entypo';
-import Feather from 'react-native-vector-icons/Feather';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView, StyleSheet, Text, Image, ActivityIndicator, Dimensions } from 'react-native';
 
+import images from '../../images';
 import Header from '../components/Header';
 import { colors } from '../constants/colors';
+import { ProductType } from '../constants/dummyData';
 import ProductDetails from '../components/ProductDetails';
 import CustomContainer from '../components/CustomContainer';
-
-import { ProductType } from '../constants/dummyData';
 import IconifiedInputField from '../components/IconifiedInputField';
 import { useGetAllProductsQuery } from '../redux/services/productsApi';
-import images from '../../images';
 
 const lastSearchData = ['TMA2 Wireless', 'Cable', 'Headphones'];
 

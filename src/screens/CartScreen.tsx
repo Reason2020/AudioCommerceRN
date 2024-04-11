@@ -1,26 +1,24 @@
 import React from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
-import { Button, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Feather from 'react-native-vector-icons/Feather';
+import { Image, Pressable, ScrollView, StyleSheet, Text } from 'react-native';
 
-import CustomContainer from '../components/CustomContainer';
 import {
-  incrementCountOfItemInCart,
-  decrementCountOfItemInCart,
-  removeItemFromCart,
-  removeAllItemsFromCart,
   CartItemType,
   CartItemsListType,
+  removeItemFromCart,
+  removeAllItemsFromCart,
+  incrementCountOfItemInCart,
+  decrementCountOfItemInCart,
 } from '../redux/reducers/cartSlice';
-import CustomButton from '../components/CustomButton';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import images from '../../images';
 import Header from '../components/Header';
 import { colors } from '../constants/colors';
-import images from '../../images';
+import CustomButton from '../components/CustomButton';
+import CustomContainer from '../components/CustomContainer';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const CartScreen = () => {
   const cartItems: CartItemsListType = useSelector((state: RootState) => state.cartItems);

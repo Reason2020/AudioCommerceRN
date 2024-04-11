@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text } from 'react-native';
 
 import { colors } from '../constants/colors';
 import images from '../../images';

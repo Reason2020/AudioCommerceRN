@@ -5,7 +5,7 @@ import Toast from 'react-native-toast-message';
 import { NavigationContainer } from '@react-navigation/native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 
 import { store } from './src/redux/store';
 import HomeScreen from './src/screens/HomeScreen';
@@ -13,7 +13,6 @@ import CartScreen from './src/screens/CartScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import SearchScreen from './src/screens/SearchScreen';
-import CustomContainer from './src/components/CustomContainer';
 import ProductDetailScreen from './src/screens/ProductDetailScreen';
 
 const Stack = createNativeStackNavigator();

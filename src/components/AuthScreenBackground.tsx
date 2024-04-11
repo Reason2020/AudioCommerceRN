@@ -3,8 +3,8 @@ import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 
-import { colors } from '../constants/colors';
 import Images from '../../images'
+import { colors } from '../constants/colors';
 
 type AuthScreenBackgroundProps = {
   children: React.JSX.Element;

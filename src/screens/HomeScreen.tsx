@@ -9,13 +9,9 @@ import {
   Text,
   View,
   ActivityIndicator,
-  Dimensions,
   Image,
 } from 'react-native';
 import { StatusBar } from 'react-native';
-import Feather from 'react-native-vector-icons/Feather';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {
   BottomSheetModal,
   BottomSheetView,
@@ -23,16 +19,16 @@ import {
   BottomSheetFlatList,
 } from '@gorhom/bottom-sheet';
 
+import images from '../../images';
 import Header from '../components/Header';
 import { colors } from '../constants/colors';
 import BannerCard from '../components/BannerCard';
 import CustomTitle from '../components/CustomTitle';
+import CustomButton from '../components/CustomButton';
 import CustomContainer from '../components/CustomContainer';
 import CustomProductList from '../components/CustomProductList';
 import { useGetAllProductsQuery } from '../redux/services/productsApi';
 import { useGetAllCategoriesQuery } from '../redux/services/categoriesApi';
-import CustomButton from '../components/CustomButton';
-import images from '../../images';
 
 type ActiveFilterItemType = string;
 

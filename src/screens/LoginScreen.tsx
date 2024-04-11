@@ -5,12 +5,11 @@ import { useFormik } from 'formik';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 
 import { colors } from '../constants/colors';
+import ErrorField from '../components/ErrorField';
 import CustomButton from '../components/CustomButton';
 import CustomizedLink from '../components/CustomizedLink';
 import IconifiedInputField from '../components/IconifiedInputField';
 import AuthScreenBackground from '../components/AuthScreenBackground';
-import CustomContainer from '../components/CustomContainer';
-import ErrorField from '../components/ErrorField';
 
 const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => {
   const handleLoginPress = (values: any) => {

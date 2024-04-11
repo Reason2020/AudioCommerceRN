@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyleSheet, Text, View, ViewProps } from 'react-native';
+import { StyleSheet, View, ViewProps } from 'react-native';
 
 interface ContainerProps extends ViewProps {
   color?: string;
@@ -37,7 +37,7 @@ const CustomContainer = ({
   border = false,
   borderColor,
   flexGrow = 1,
-  gap=10,
+  gap = 10,
   ...props
 }: ContainerProps) => {
   return (

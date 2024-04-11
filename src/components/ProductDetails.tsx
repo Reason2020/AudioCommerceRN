@@ -1,13 +1,11 @@
 import React from 'react';
 
 import { Dimensions, StyleSheet, Text, Image } from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
+import images from '../../images';
 import { colors } from '../constants/colors';
 import CustomContainer from './CustomContainer';
 import { ProductType } from '../constants/dummyData';
-import images from '../../images';
 
 const ProductDetails = ({ title, rating, price }: ProductType) => {
   return (

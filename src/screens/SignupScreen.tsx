@@ -2,7 +2,7 @@ import React from 'react';
 
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 
 import ErrorField from '../components/ErrorField';
 import CustomButton from '../components/CustomButton';

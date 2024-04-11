@@ -10,16 +10,13 @@ import {
   StyleSheet,
   ActivityIndicator,
   SafeAreaView,
-  Button,
-  ToastAndroid,
   View,
   StatusBar,
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { useSelector, useDispatch } from 'react-redux';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
-import Images from '../../images';
+import images from '../../images';
 import {
   useGetAllProductsQuery,
   useGetProductByIdQuery,
@@ -30,10 +27,9 @@ import { RootState } from '../redux/store';
 import { colors } from '../constants/colors';
 import { reviews } from '../constants/dummyData';
 import CustomButton from '../components/CustomButton';
-import { CartItemsListType, addItemToCart } from '../redux/reducers/cartSlice';
+import { addItemToCart } from '../redux/reducers/cartSlice';
 import CustomContainer from '../components/CustomContainer';
 import CustomProductList from '../components/CustomProductList';
-import images from '../../images';
 
 type FilterItemType = 'Overview' | 'Features';
 const filterItems: FilterItemType[] = ['Overview', 'Features'];
@@ -192,7 +188,7 @@ const ProductDetailScreen = ({ route, navigation }: { route: any; navigation: an
                 return (
                   // Review Card Container
                   <CustomContainer row alignItems="flex-start" vMargin={10} key={index}>
-                    <Image source={Images.UserProfile} style={styles.reviewerProfileImage} />
+                    <Image source={images.UserProfile} style={styles.reviewerProfileImage} />
 
                     {/* Review Details Container */}
                     <CustomContainer width={Dimensions.get('screen').width * 0.75}>
