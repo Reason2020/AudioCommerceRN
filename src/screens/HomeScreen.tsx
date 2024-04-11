@@ -10,6 +10,7 @@ import {
   View,
   ActivityIndicator,
   Dimensions,
+  Image,
 } from 'react-native';
 import { StatusBar } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
@@ -31,6 +32,7 @@ import CustomProductList from '../components/CustomProductList';
 import { useGetAllProductsQuery } from '../redux/services/productsApi';
 import { useGetAllCategoriesQuery } from '../redux/services/categoriesApi';
 import CustomButton from '../components/CustomButton';
+import images from '../../images';
 
 type ActiveFilterItemType = string;
 
@@ -97,7 +99,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
           />
           <CustomTitle subText="Hi, Andrea" importantText="What are you looking for today?" />
 
-          <CustomContainer row flex alignItems="center" hPadding={16}>
+          <CustomContainer row flex alignItems="center" hPadding={15} borderRadius={10}>
             <Pressable onPress={() => navigation.navigate('Search')} style={{ flex: 1 }}>
               <CustomContainer
                 color={colors.white}
@@ -110,13 +112,19 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                 borderColor={colors.darkGrey}
                 alignItems="center"
               >
-                <Feather name="search" size={24} color={colors.darkGrey} />
-                <Text>Search headphone</Text>
+                <Image
+                  source={images.SearchIcon}
+                  style={styles.icon}
+                />
+                <Text style={styles.placeholderText}>Search headphone</Text>
               </CustomContainer>
             </Pressable>
 
             <Pressable style={styles.filterButton} onPress={handleOpenModalPress}>
-              <SimpleLineIcons name="equalizer" size={24} color={colors.black} />
+              <Image
+                source={images.SlidersIcon}
+                style={styles.icon}
+              />
             </Pressable>
           </CustomContainer>
 
@@ -161,7 +169,10 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                       handleModalClose();
                     }}
                   >
-                    <FontAwesome name="close" size={24} color={colors.black} />
+                    <Image
+                      source={images.XIcon}
+                      style={styles.icon}
+                    />
                   </Pressable>
                 </CustomContainer>
                 <Text style={styles.filterTitle}>Category</Text>
@@ -180,10 +191,10 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                         ]}
                       >
                         <Text
-                          style={{
+                          style={[{
                             color: activeFilterItem === item ? colors.white : colors.black,
                             fontWeight: '500',
-                          }}
+                          }, styles.filterItem]}
                         >
                           {item}
                         </Text>
@@ -220,8 +231,9 @@ const styles = StyleSheet.create({
     height: 40,
   },
   filterItemContainer: {
-    padding: 10,
-    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 30,
     marginHorizontal: 10,
   },
   filterButton: {
@@ -243,11 +255,32 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '700',
     color: colors.black,
+    lineHeight: 36,
+    letterSpacing: 0.2
   },
   filterTitle: {
     fontSize: 16,
     fontWeight: '400',
     color: colors.black,
     marginVertical: 8,
+    lineHeight: 20,
+    letterSpacing: 0.2
   },
+  filterItem: {
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight: 20,
+    letterSpacing: 0.2
+  },
+  icon: {
+    height: 24,
+    width: 24,
+  },
+  placeholderText: {
+    color: colors.grey,
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight: 20,
+    letterSpacing: 0.2
+  }
 });

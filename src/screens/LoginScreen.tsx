@@ -39,7 +39,7 @@ const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => 
       <AuthScreenBackground>
         <View style={styles.formContainer}>
           <IconifiedInputField
-            iconName="mail"
+            iconName='Mail'
             placeholderText="Email Address"
             iconType="antdesign"
             showBorder={false}
@@ -49,7 +49,7 @@ const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => 
           />
           {touched.email && errors.email && <ErrorField errorText={errors.email} />}
           <IconifiedInputField
-            iconName="lock"
+            iconName='Lock'
             placeholderText="Password"
             iconType="feather"
             showBorder={false}
@@ -91,10 +91,12 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   forgotPasswordText: {
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 14,
+    fontWeight: '700',
     color: colors.white,
     textAlign: 'center',
+    lineHeight: 20,
+    letterSpacing: 0.2
   },
   signUpLinkText: {
     textDecorationLine: 'underline',

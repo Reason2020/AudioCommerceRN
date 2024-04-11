@@ -41,7 +41,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
       <AuthScreenBackground>
         <View style={styles.formContainer}>
           <IconifiedInputField
-            iconName="mail"
+            iconName="Mail"
             placeholderText="Email"
             iconType="antdesign"
             showBorder={false}
@@ -53,7 +53,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
             <ErrorField errorText={errors.email[0].toUpperCase() + errors.email.slice(1)} />
           )}
           <IconifiedInputField
-            iconName="lock"
+            iconName="Lock"
             placeholderText="Password"
             iconType="feather"
             showBorder={false}

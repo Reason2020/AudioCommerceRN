@@ -4,6 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 
 import { colors } from '../constants/colors';
+import Images from '../../images'
 
 type AuthScreenBackgroundProps = {
   children: React.JSX.Element;
@@ -14,9 +15,7 @@ const AuthScreenBackground: React.FC<AuthScreenBackgroundProps> = ({
 }): React.JSX.Element => {
   return (
     <ImageBackground
-      source={{
-        uri: 'https://s3-alpha-sig.figma.com/img/7166/f48c/d8d5ce0132fa4ccb92c4868b538ba114?Expires=1712534400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nBXVubBeKrrsaNMaaBLbAUhSW4cHztINApmxoM4S46sebEFWNWevyMq8ePkzZXwN8-XeKqdPNASyyG~5Q2fanrDyaQvkaIGBEsZIXBbN46kPE2ktBnS7dEjlERZ8m6vjsb4TxcTkhzM1JMptQ84XIfRCqgAocVsmWUG6QBhsXRj4yRAbX0UaTxzzvx6CN7lBaAjFuxfDaO9nV1bjvuFtalo-I2j3GRc3cFKXgbgXIKO3LeumBAOlO3hP5X4PtUH4EfFzS39fNeYfA8xxxcTraUJs4QCBmqA9UqZTG41ItDXagiuy2nlmnVd5FrnOEOo1nAWHNX7gKn7PndGZIMO4XQ__',
-      }}
+      source={Images.BackgroundImage}
       style={styles.image}
     >
       <LinearGradient colors={['#0acf8344', 'transparent']} style={styles.gradient}>
@@ -55,13 +54,17 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   titleText: {
-    fontSize: 50,
-    fontWeight: '800',
+    fontSize: 51,
+    fontWeight: '700',
     color: colors.white,
+    lineHeight: 66,
+    letterSpacing: 0.6,
   },
   subtitleText: {
-    fontSize: 18,
-    fontWeight: '600',
+    fontSize: 14,
+    fontWeight: '700',
     color: colors.white,
+    lineHeight: 20,
+    letterSpacing: 0.2
   },
 });
