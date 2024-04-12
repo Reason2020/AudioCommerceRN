@@ -42,9 +42,13 @@ const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => 
       if (response) {
         navigation.navigate('Home');
       }
-    } catch (err) { 
-      console.log('Error: ' + err)
-      Alert.alert('SignIn failed', 'Could not sign in. Try again later');
+    } catch (err: any) { 
+      console.log(err.toString().includes('invalid-credential'));
+      if (err.toString().includes('invalid-credential')) {
+        Alert.alert('SignIn Failed', 'Invalid Email or Password');
+      } else {
+        Alert.alert('SignIn failed', 'Could not sign in. Try again later.');
+      }
     }
   }
 

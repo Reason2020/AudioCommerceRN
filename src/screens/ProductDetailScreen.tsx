@@ -137,7 +137,7 @@ const ProductDetailScreen = ({ route, navigation }: { route: any; navigation: an
         swipeable: true,
         visibilityTime: 3000,
         autoHide: true,
-        topOffset: 500
+        topOffset: 100
       })
     }
   };
