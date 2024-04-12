@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyleSheet, Text, View, ViewProps } from 'react-native';
+import { StyleSheet, View, ViewProps } from 'react-native';
 
 interface ContainerProps extends ViewProps {
   color?: string;
@@ -18,6 +18,7 @@ interface ContainerProps extends ViewProps {
   border?: boolean;
   borderColor?: string;
   flexGrow?: number;
+  gap?: number;
 }
 
 const CustomContainer = ({
@@ -36,6 +37,7 @@ const CustomContainer = ({
   border = false,
   borderColor,
   flexGrow = 1,
+  gap = 10,
   ...props
 }: ContainerProps) => {
   return (
@@ -49,7 +51,7 @@ const CustomContainer = ({
           marginVertical: vMargin,
           marginHorizontal: hMargin,
           borderRadius,
-          gap: 10,
+          gap: gap,
         },
         flex && {
           flex: 1,

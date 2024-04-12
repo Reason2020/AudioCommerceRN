@@ -30,15 +30,18 @@ export default CustomizedLink;
 
 const styles = StyleSheet.create({
   descriptionText: {
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 14,
+    fontWeight: '400',
     color: colors.white,
     textAlign: 'center',
+    lineHeight: 20,
+    letterSpacing: 0.2,
   },
   linkText: {
     textDecorationLine: 'underline',
     textDecorationColor: colors.primary,
     color: colors.primary,
     textDecorationStyle: 'solid',
+    fontWeight: '700'
   },
 });

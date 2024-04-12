@@ -2,18 +2,20 @@ import React from 'react';
 
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Alert } from 'react-native';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 import { colors } from '../constants/colors';
+import ErrorField from '../components/ErrorField';
 import CustomButton from '../components/CustomButton';
 import CustomizedLink from '../components/CustomizedLink';
 import IconifiedInputField from '../components/IconifiedInputField';
 import AuthScreenBackground from '../components/AuthScreenBackground';
-import CustomContainer from '../components/CustomContainer';
-import ErrorField from '../components/ErrorField';
+import { FIREBASE_AUTH } from '../../Firebase';
 
 const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => {
-  const handleLoginPress = (values: any) => {
+  const handleLoginPress = () => {
+    signIn();
     navigation.navigate('Home');
   };
 
@@ -31,15 +33,31 @@ const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => 
       password: '',
     },
     validationSchema: validationSchema,
-    onSubmit: submitValues => handleLoginPress(submitValues),
+    onSubmit: submitValues => handleLoginPress(),
   });
+
+  const signIn = async () => {
+    try {
+      const response = await signInWithEmailAndPassword(FIREBASE_AUTH, values.email, values.password);
+      if (response) {
+        navigation.navigate('Home');
+      }
+    } catch (err: any) { 
+      console.log(err.toString().includes('invalid-credential'));
+      if (err.toString().includes('invalid-credential')) {
+        Alert.alert('SignIn Failed', 'Invalid Email or Password');
+      } else {
+        Alert.alert('SignIn failed', 'Could not sign in. Try again later.');
+      }
+    }
+  }
 
   return (
     <SafeAreaView style={styles.mainContainer}>
       <AuthScreenBackground>
         <View style={styles.formContainer}>
           <IconifiedInputField
-            iconName="mail"
+            iconName='Mail'
             placeholderText="Email Address"
             iconType="antdesign"
             showBorder={false}
@@ -49,7 +67,7 @@ const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => 
           />
           {touched.email && errors.email && <ErrorField errorText={errors.email} />}
           <IconifiedInputField
-            iconName="lock"
+            iconName='Lock'
             placeholderText="Password"
             iconType="feather"
             showBorder={false}
@@ -64,7 +82,7 @@ const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => 
             iconName=""
             iconType=""
             buttonText="Sign In"
-            handleButtonPress={() => (isValid ? handleLoginPress(values) : console.log('Error'))}
+            handleButtonPress={() => (isValid && signIn())}
           />
 
           <CustomizedLink
@@ -91,10 +109,12 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   forgotPasswordText: {
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 14,
+    fontWeight: '700',
     color: colors.white,
     textAlign: 'center',
+    lineHeight: 20,
+    letterSpacing: 0.2
   },
   signUpLinkText: {
     textDecorationLine: 'underline',

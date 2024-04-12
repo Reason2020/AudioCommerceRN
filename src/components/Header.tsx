@@ -1,8 +1,5 @@
 import React from 'react';
 
-import Feather from 'react-native-vector-icons/Feather';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { colors } from '../constants/colors';
@@ -10,6 +7,7 @@ import CustomContainer from './CustomContainer';
 import { useSelector } from 'react-redux';
 import { CartItemsListType } from '../redux/reducers/cartSlice';
 import { RootState } from '../redux/store';
+import images from '../../images';
 
 type HeaderProps = {
   hasTitle: Boolean;
@@ -36,9 +34,15 @@ const Header: React.FC<HeaderProps> = ({
     <View style={styles.container}>
       <Pressable onPress={handleLeftIconPress}>
         {leftIconName === 'chevron-back' ? (
-          <Ionicons name={leftIconName} size={20} color={colors.black} />
+          <Image
+            source={images.ChevronLeftIcon}
+            style={styles.icon}
+          />
         ) : (
-          <FontAwesome6 name={leftIconName} size={20} color={colors.black} />
+            <Image
+              source={images.MenuVariantIcon}
+              style={styles.icon}
+            />
         )}
       </Pressable>
 
@@ -46,14 +50,23 @@ const Header: React.FC<HeaderProps> = ({
 
       <Pressable onPress={handleRightIconPress}>
         {rightIconName === 'user' ? (
-          <Image source={require('../../images/userProfile.png')} style={styles.image} />
+          <Image
+            source={images.UserProfile} style={styles.image} />
         ) : rightIconName === 'shopping-cart' ? (
           <CustomContainer>
-            <Feather name="shopping-cart" size={20} color={colors.black} />
-            {cartItems.length > 0 && <View style={styles.redCircle} />}
+            <Pressable onPress={handleRightIconPress}>
+                <Image
+                  source={images.ShoppingCartIcon}
+                  style={styles.icon}
+                />
+              {cartItems.length > 0 && <View style={styles.redCircle} />}
+            </Pressable>
           </CustomContainer>
         ) : (
-          <Feather name="trash-2" size={20} color={colors.black} />
+              <Image
+                source={images.TrashIcon}
+                style={styles.icon}
+              />
         )}
       </Pressable>
     </View>
@@ -71,14 +84,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   headerTitleText: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '700',
     color: colors.black,
+    lineHeight: 20,
+    letterSpacing: 0.2,
   },
   image: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 35,
+    height: 35,
+    borderRadius: 17.5,
   },
   redCircle: {
     position: 'absolute',
@@ -89,4 +104,8 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     backgroundColor: 'red',
   },
+  icon: {
+    height: 20,
+    width: 20,
+  }
 });

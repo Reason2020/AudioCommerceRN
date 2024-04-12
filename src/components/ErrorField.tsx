@@ -1,6 +1,8 @@
 import { Text } from 'react-native';
-import CustomContainer from './CustomContainer';
+
 import { StyleSheet } from 'react-native';
+
+import CustomContainer from './CustomContainer';
 
 const ErrorField = ({ errorText }: { errorText: string }) => {
   return (

@@ -2,7 +2,8 @@ import React from 'react';
 
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Alert, SafeAreaView, StyleSheet, View } from 'react-native';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 import ErrorField from '../components/ErrorField';
 import CustomButton from '../components/CustomButton';
@@ -10,6 +11,7 @@ import CustomizedLink from '../components/CustomizedLink';
 import OAuthCustomButton from '../components/OAuthCustomButton';
 import IconifiedInputField from '../components/IconifiedInputField';
 import AuthScreenBackground from '../components/AuthScreenBackground';
+import { FIREBASE_AUTH } from '../../Firebase';
 
 const initialValues = {
   email: '',
@@ -27,6 +29,7 @@ const validationSchema = yup.object({
 
 const SignupScreen = ({ navigation }: { navigation: any }) => {
   const handleSignUpScreen = () => {
+    signUp();
     navigation.navigate('Home');
   };
 
@@ -36,12 +39,24 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
     onSubmit: () => console.log('Signup'),
   });
 
+  const signUp = async () => {
+    try {
+      const response = await createUserWithEmailAndPassword(FIREBASE_AUTH, values.email, values.password);
+      if (response) {
+        navigation.navigate('Home');
+      }
+    } catch (err) { 
+      console.log('Error creating user: ' + err)
+      Alert.alert('Signup Failed', 'Could not sign up user. Try again later.')
+    }
+  }
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <AuthScreenBackground>
         <View style={styles.formContainer}>
           <IconifiedInputField
-            iconName="mail"
+            iconName="Mail"
             placeholderText="Email"
             iconType="antdesign"
             showBorder={false}
@@ -53,7 +68,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
             <ErrorField errorText={errors.email[0].toUpperCase() + errors.email.slice(1)} />
           )}
           <IconifiedInputField
-            iconName="lock"
+            iconName="Lock"
             placeholderText="Password"
             iconType="feather"
             showBorder={false}

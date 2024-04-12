@@ -10,15 +10,13 @@ import {
   StyleSheet,
   ActivityIndicator,
   SafeAreaView,
-  Button,
-  ToastAndroid,
   View,
   StatusBar,
 } from 'react-native';
+import Toast from 'react-native-toast-message';
 import { useSelector, useDispatch } from 'react-redux';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
-import Images from '../../images';
+import images from '../../images';
 import {
   useGetAllProductsQuery,
   useGetProductByIdQuery,
@@ -29,7 +27,7 @@ import { RootState } from '../redux/store';
 import { colors } from '../constants/colors';
 import { reviews } from '../constants/dummyData';
 import CustomButton from '../components/CustomButton';
-import { CartItemsListType, addItemToCart } from '../redux/reducers/cartSlice';
+import { addItemToCart } from '../redux/reducers/cartSlice';
 import CustomContainer from '../components/CustomContainer';
 import CustomProductList from '../components/CustomProductList';
 
@@ -64,17 +62,9 @@ const ProductDetailScreen = ({ route, navigation }: { route: any; navigation: an
 
   const renderFilterMenuItem = (filterItem: FilterItemType) => {
     return (
-      <Pressable
-        onPress={() => setActiveFilterItem(filterItem)}
-        style={[
-          styles.filterButton,
-          {
-            borderBottomColor: activeFilterItem === filterItem ? colors.primary : colors.white,
-            borderBottomWidth: 2,
-          },
-        ]}
-      >
+      <Pressable onPress={() => setActiveFilterItem(filterItem)} style={[styles.filterButton]}>
         <Text style={styles.filterItemText}>{filterItem}</Text>
+        {activeFilterItem === filterItem && <View style={styles.underline} />}
       </Pressable>
     );
   };
@@ -85,11 +75,17 @@ const ProductDetailScreen = ({ route, navigation }: { route: any; navigation: an
 
     const stars = [];
     for (let i = 0; i < filledStars; i++) {
-      stars.push(<AntDesign name="star" size={20} color={colors.accent} />);
+      stars.push(<Image
+        source={images.StarFilledIcon}
+        style={styles.ratingIcon}
+      />);
     }
 
     for (let i = 0; i < emptyStars; i++) {
-      stars.push(<AntDesign name="staro" size={20} color={colors.accent} />);
+      stars.push(<Image
+        source={images.StarOutlinedIcon}
+        style={styles.ratingIcon}
+      />);
     }
 
     return stars;
@@ -134,16 +130,24 @@ const ProductDetailScreen = ({ route, navigation }: { route: any; navigation: an
         })
       );
     } else {
-      ToastAndroid.showWithGravity(
-        'Item already exists in cart',
-        ToastAndroid.SHORT,
-        ToastAndroid.CENTER
-      );
+      Toast.show({
+        type: 'info',
+        text1: 'Item already added to cart',
+        position: 'top',
+        swipeable: true,
+        visibilityTime: 3000,
+        autoHide: true,
+        topOffset: 100
+      })
     }
   };
 
   if (loadingProduct || loadingAllProducts) {
-    return <ActivityIndicator size={'large'} color={colors.accent} />;
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator size={'large'} color={colors.accent} />
+      </View>
+    );
   }
 
   return (
@@ -183,12 +187,12 @@ const ProductDetailScreen = ({ route, navigation }: { route: any; navigation: an
 
           {activeFilterItem === 'Overview' ? (
             <CustomContainer vMargin={15} hPadding={10}>
-              <Text style={styles.reviewTitleText}>Review ({reviews.length})</Text>
+              {/* <Text style={styles.reviewTitleText}>Review ({reviews.length})</Text> */}
               {reviews.map((review, index) => {
                 return (
                   // Review Card Container
                   <CustomContainer row alignItems="flex-start" vMargin={10} key={index}>
-                    <Image source={Images.UserProfile} style={styles.reviewerProfileImage} />
+                    <Image source={images.UserProfile} style={styles.reviewerProfileImage} />
 
                     {/* Review Details Container */}
                     <CustomContainer width={Dimensions.get('screen').width * 0.75}>
@@ -241,61 +245,92 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   priceText: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '700',
     color: colors.primary,
+    lineHeight: 20,
+    letterSpacing: 0.2,
   },
   titleText: {
     fontSize: 28,
     fontWeight: '700',
     color: colors.black,
+    lineHeight: 36,
+    letterSpacing: 0.2,
   },
   filterButton: {
     paddingHorizontal: 15,
     paddingVertical: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
   },
   filterItemText: {
     color: colors.black,
     fontSize: 16,
     fontWeight: '400',
+    lineHeight: 20,
+    letterSpacing: 0.2,
   },
   productOverviewImage: {
-    height: Dimensions.get('screen').height * 0.5,
-    width: '100%',
+    height: 285,
+    width: 247,
     resizeMode: 'contain',
   },
   reviewTitleText: {
     fontSize: 16,
     fontWeight: '400',
     color: colors.black,
+    lineHeight: 20,
+    letterSpacing: 0.2,
   },
   reviewerProfileImage: {
-    height: Dimensions.get('screen').width * 0.14,
-    width: Dimensions.get('screen').width * 0.14,
-    borderRadius: Dimensions.get('screen').width * 0.07,
+    height: 40,
+    width: 40,
+    borderRadius: 20,
   },
   usernameText: {
     fontSize: 16,
     fontWeight: '400',
     color: colors.black,
+    lineHeight: 20,
+    letterSpacing: 0.2,
   },
   reviewTimeText: {
     fontSize: 12,
     fontWeight: '400',
     color: colors.darkGrey,
+    lineHeight: 15,
+    letterSpacing: 0.2,
   },
   commentText: {
     fontSize: 14,
     fontWeight: '400',
     color: colors.black,
+    lineHeight: 20,
+    letterSpacing: 0.2,
   },
   descriptionText: {
     fontSize: 14,
     fontWeight: '400',
     color: colors.black,
+    lineHeight: 22,
+    letterSpacing: 0.2
   },
   descriptionContainer: {
     marginVertical: 10,
     paddingHorizontal: 10,
+  },
+  ratingIcon: {
+    height: 16,
+    width: 16,
+  },
+  underline: {
+    height: 3,
+    width: 24,
+    backgroundColor: colors.primary,
+    // marginTop: 10,
+    position: 'absolute',
+    bottom: 0,
   },
 });

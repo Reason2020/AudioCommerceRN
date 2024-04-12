@@ -1,25 +1,24 @@
 import React from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
-import { Button, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Feather from 'react-native-vector-icons/Feather';
+import { Image, Pressable, ScrollView, StyleSheet, Text } from 'react-native';
 
-import CustomContainer from '../components/CustomContainer';
 import {
-  incrementCountOfItemInCart,
-  decrementCountOfItemInCart,
-  removeItemFromCart,
-  removeAllItemsFromCart,
   CartItemType,
   CartItemsListType,
+  removeItemFromCart,
+  removeAllItemsFromCart,
+  incrementCountOfItemInCart,
+  decrementCountOfItemInCart,
 } from '../redux/reducers/cartSlice';
-import CustomButton from '../components/CustomButton';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import images from '../../images';
 import Header from '../components/Header';
 import { colors } from '../constants/colors';
+import CustomButton from '../components/CustomButton';
+import CustomContainer from '../components/CustomContainer';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const CartScreen = () => {
   const cartItems: CartItemsListType = useSelector((state: RootState) => state.cartItems);
@@ -95,19 +94,28 @@ const CartScreen = () => {
                         style={styles.counterButtons}
                         onPress={() => handleDecrementPress(cartItem)}
                       >
-                        <AntDesign name="minus" size={20} color={colors.black} />
+                        <Image
+                          source={images.MinusIcon}
+                          style={styles.icon}
+                        />
                       </Pressable>
                       <Text style={styles.countText}>{cartItem.count}</Text>
                       <Pressable
                         style={styles.counterButtons}
                         onPress={() => dispatch(incrementCountOfItemInCart(cartItem.id))}
                       >
-                        <AntDesign name="plus" size={20} color={colors.black} />
+                        <Image
+                          source={images.PlusIcon}
+                          style={styles.icon}
+                        />
                       </Pressable>
                     </CustomContainer>
 
                     <Pressable onPress={() => dispatch(removeItemFromCart(cartItem.id))}>
-                      <Feather name="trash-2" size={20} color={colors.black} />
+                      <Image
+                        source={images.TrashIcon}
+                        style={styles.icon}
+                      />
                     </Pressable>
                   </CustomContainer>
                 </CustomContainer>
@@ -123,10 +131,11 @@ const CartScreen = () => {
 
       <CustomContainer color={colors.white} hPadding={15} vPadding={15} style={{ gap: 15 }}>
         <CustomContainer row justifyContent="space-between" alignItems="center">
-          <Text>Total {cartItems.length} items</Text>
-          <Text>USD {calculateTotalPrice()}</Text>
+          <Text style={styles.totalTitleText}>Total {cartItems.length} items</Text>
+          <Text style={styles.totalPriceText}>USD {calculateTotalPrice()}</Text>
         </CustomContainer>
         <CustomButton
+          iconName='chevron-right'
           buttonText="Proceed to Checkout"
           handleButtonPress={() => console.log('Proceed to Checkout')}
         />
@@ -146,29 +155,57 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
-    height: 75,
-    width: 75,
+    height: 67,
+    width: 67,
     resizeMode: 'contain',
   },
   titleText: {
     fontSize: 16,
     fontWeight: '400',
     color: colors.black,
+    lineHeight: 21,
+    letterSpacing: 0.2,
   },
   priceText: {
     fontSize: 14,
     fontWeight: '700',
     color: colors.black,
+    lineHeight: 18,
+    letterSpacing: 0.2,
   },
   counterButtons: {
     borderWidth: 1,
     borderColor: colors.grey,
-    borderRadius: 8,
-    padding: 5,
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    height: 30,
+    width: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   countText: {
     fontSize: 16,
     fontWeight: '400',
     color: colors.black,
+    lineHeight: 21,
+    letterSpacing: 0.2,
+  },
+  icon: {
+    height: 20,
+    width: 20,
+  },
+  totalTitleText: {
+    fontSize: 12,
+    fontWeight: '700',
+    lineHeight: 20,
+    letterSpacing: 0.2,
+    color: colors.darkGrey,
+  },
+  totalPriceText: {
+    fontSize: 16,
+    fontWeight: '700',
+    lineHeight: 20,
+    letterSpacing: 0.2,
   },
 });

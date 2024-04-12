@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 
-import Feather from 'react-native-vector-icons/Feather';
-import { StyleSheet, TextInput, View } from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import { Image, StyleSheet, TextInput, View } from 'react-native';
 
+import images from '../../images';
 import { colors } from '../constants/colors';
 
 type IconifiedInputFieldProps = {
-  iconName: string;
+  iconName: 'Mail' | 'Lock' | 'Search';
   placeholderText: string;
   iconType: 'antdesign' | 'feather';
   showBorder: boolean;
@@ -31,14 +30,25 @@ const IconifiedInputField: React.FC<IconifiedInputFieldProps> = ({
     <View
       style={[
         styles.container,
-        showBorder ? { borderColor: colors.grey, borderWidth: 1, borderRadius: 15 } : null,
+        showBorder ? { borderColor: colors.grey, borderWidth: 1, borderRadius: 10 } : null,
       ]}
     >
       <View>
-        {iconType === 'antdesign' ? (
-          <AntDesign name={iconName} size={20} color={colors.grey} />
-        ) : (
-          <Feather name={iconName} size={20} color={colors.grey} />
+        {iconName === 'Lock' ? (
+          <Image
+            source={images.LockIcon}
+            style={styles.image}
+          />
+        ) : iconName === 'Mail' ? (
+            <Image
+              source={images.MailIcon}
+              style={styles.image}
+            />
+          ) : (
+              <Image
+                source={images.SearchIcon}
+                style={styles.image}
+              />
         )}
       </View>
       <TextInput
@@ -48,6 +58,7 @@ const IconifiedInputField: React.FC<IconifiedInputFieldProps> = ({
         placeholderTextColor={colors.grey}
         secureTextEntry={secure}
         onBlur={handleBlur}
+        style={styles.textEntry}
       />
     </View>
   );
@@ -62,9 +73,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 10,
     paddingHorizontal: 15,
-    paddingVertical: 8,
-    gap: 10,
+    paddingVertical: 15,
+    gap: 12,
     marginVertical: 10,
-    marginHorizontal: 15,
   },
+  image: {
+    width: 20,
+    height: 20,
+  },
+  textEntry: {
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight: 20
+  }
 });

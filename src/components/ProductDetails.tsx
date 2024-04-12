@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { Dimensions, StyleSheet, Text } from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import { Dimensions, StyleSheet, Text, Image } from 'react-native';
 
+import images from '../../images';
 import { colors } from '../constants/colors';
 import CustomContainer from './CustomContainer';
 import { ProductType } from '../constants/dummyData';
@@ -21,11 +20,17 @@ const ProductDetails = ({ title, rating, price }: ProductType) => {
       <Text style={styles.priceText}>USD {price}</Text>
       <CustomContainer row justifyContent="space-between" alignItems="center">
         <CustomContainer row justifyContent="flex-start" alignItems="center">
-          <AntDesign name="star" size={24} color={colors.accent} />
+          <Image
+            source={images.StarFilledIcon}
+            style={styles.ratingIcon}
+          />
           <Text style={styles.reviewText}>{rating.rate}</Text>
         </CustomContainer>
         <Text style={styles.reviewText}>{rating.count} Reviews</Text>
-        <Entypo name="dots-three-vertical" size={24} color={colors.darkGrey} />
+        <Image
+          source={images.MoreVerticalIcon}
+          style={styles.moreIcon}
+        />
       </CustomContainer>
     </CustomContainer>
   );
@@ -41,18 +46,32 @@ const styles = StyleSheet.create({
     flexGrow: 2,
   },
   titleText: {
-    fontSize: 21,
-    fontWeight: '400',
-    color: colors.black,
-  },
-  priceText: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: colors.black,
-  },
-  reviewText: {
     fontSize: 16,
     fontWeight: '400',
     color: colors.black,
+    lineHeight: 21,
+    letterSpacing: 0.2,
   },
+  priceText: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: colors.black,
+    lineHeight: 18,
+    letterSpacing: 0.2
+  },
+  reviewText: {
+    fontSize: 12,
+    fontWeight: '400',
+    color: colors.black,
+    lineHeight: 15,
+    letterSpacing: 0.2
+  },
+  ratingIcon: {
+    height: 16,
+    width: 16,
+  },
+  moreIcon: {
+    height: 20,
+    width: 20,
+  }
 });

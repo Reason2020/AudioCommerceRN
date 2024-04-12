@@ -27,13 +27,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   subText: {
-    fontSize: 18,
-    fontWeight: '600',
+    fontSize: 16,
+    fontWeight: '400',
     color: colors.black,
+    lineHeight: 20,
+    letterSpacing: 0.2,
   },
   importantText: {
     fontSize: 24,
-    fontWeight: '800',
+    fontWeight: '700',
     color: colors.black,
+    lineHeight: 32,
+    letterSpacing: 0.5
   },
 });

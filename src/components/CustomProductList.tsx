@@ -43,13 +43,17 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
   headerTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: colors.black,
-  },
-  seeAllBtn: {
     fontSize: 16,
     fontWeight: '400',
+    color: colors.black,
+    lineHeight: 20,
+    letterSpacing: 0.2,
+  },
+  seeAllBtn: {
+    fontSize: 14,
+    fontWeight: '400',
     color: colors.darkGrey,
+    lineHeight: 20,
+    letterSpacing: 0.2
   },
 });
