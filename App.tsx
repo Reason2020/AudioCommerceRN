@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Provider } from 'react-redux';
 import Toast from 'react-native-toast-message';
@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar, StyleSheet } from 'react-native';
+import Bootsplash from 'react-native-bootsplash'
 
 import { store } from './src/redux/store';
 import HomeScreen from './src/screens/HomeScreen';
@@ -18,6 +19,11 @@ import ProductDetailScreen from './src/screens/ProductDetailScreen';
 const Stack = createNativeStackNavigator();
 
 function App(): React.JSX.Element {
+
+  useEffect(() => {
+    Bootsplash.hide({ fade: true })
+  }, [])
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Provider store={store}>
