@@ -75,7 +75,11 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
   console.log('Fetched Data: ', data);
 
   if (isLoading) {
-    return <ActivityIndicator size={'large'} color={colors.accent} />;
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size={'large'} color={colors.accent} />
+      </View>
+    );
   }
 
   return (

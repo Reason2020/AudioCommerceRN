@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { ScrollView, StyleSheet, Text, Image, ActivityIndicator, Dimensions } from 'react-native';
+import { ScrollView, StyleSheet, Text, Image, ActivityIndicator, Dimensions, View, SafeAreaView } from 'react-native';
 
 import images from '../../images';
 import Header from '../components/Header';
@@ -28,7 +27,11 @@ const SearchScreen = ({ navigation }: { navigation: any }) => {
    }
 
   if (isLoading) {
-    return <ActivityIndicator size={'large'} color={colors.accent} />;
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size={'large'} color={colors.accent} />
+      </View>
+    );
   }
 
   return (

@@ -143,7 +143,11 @@ const ProductDetailScreen = ({ route, navigation }: { route: any; navigation: an
   };
 
   if (loadingProduct || loadingAllProducts) {
-    return <ActivityIndicator size={'large'} color={colors.accent} />;
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator size={'large'} color={colors.accent} />
+      </View>
+    );
   }
 
   return (
@@ -183,7 +187,7 @@ const ProductDetailScreen = ({ route, navigation }: { route: any; navigation: an
 
           {activeFilterItem === 'Overview' ? (
             <CustomContainer vMargin={15} hPadding={10}>
-              <Text style={styles.reviewTitleText}>Review ({reviews.length})</Text>
+              {/* <Text style={styles.reviewTitleText}>Review ({reviews.length})</Text> */}
               {reviews.map((review, index) => {
                 return (
                   // Review Card Container
