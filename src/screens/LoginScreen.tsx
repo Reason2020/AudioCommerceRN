@@ -12,6 +12,7 @@ import CustomizedLink from '../components/CustomizedLink';
 import IconifiedInputField from '../components/IconifiedInputField';
 import AuthScreenBackground from '../components/AuthScreenBackground';
 import { FIREBASE_AUTH } from '../../Firebase';
+import CustomContainer from '../components/CustomContainer';
 
 const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => {
   const handleLoginPress = () => {
@@ -53,7 +54,7 @@ const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => 
   }
 
   return (
-    <SafeAreaView style={styles.mainContainer}>
+    <CustomContainer style={styles.mainContainer}>
       <AuthScreenBackground>
         <View style={styles.formContainer}>
           <IconifiedInputField
@@ -92,7 +93,7 @@ const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => 
           />
         </View>
       </AuthScreenBackground>
-    </SafeAreaView>
+    </CustomContainer>
   );
 };
 

@@ -12,6 +12,7 @@ import OAuthCustomButton from '../components/OAuthCustomButton';
 import IconifiedInputField from '../components/IconifiedInputField';
 import AuthScreenBackground from '../components/AuthScreenBackground';
 import { FIREBASE_AUTH } from '../../Firebase';
+import CustomContainer from '../components/CustomContainer';
 
 const initialValues = {
   email: '',
@@ -52,7 +53,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
   }
 
   return (
-    <SafeAreaView style={styles.mainContainer}>
+    <CustomContainer style={styles.mainContainer}>
       <AuthScreenBackground>
         <View style={styles.formContainer}>
           <IconifiedInputField
@@ -103,7 +104,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
           />
         </View>
       </AuthScreenBackground>
-    </SafeAreaView>
+    </CustomContainer>
   );
 };
 
