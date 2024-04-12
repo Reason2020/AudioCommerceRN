@@ -2,7 +2,8 @@ import React from 'react';
 
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Alert } from 'react-native';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 import { colors } from '../constants/colors';
 import ErrorField from '../components/ErrorField';
@@ -10,9 +11,11 @@ import CustomButton from '../components/CustomButton';
 import CustomizedLink from '../components/CustomizedLink';
 import IconifiedInputField from '../components/IconifiedInputField';
 import AuthScreenBackground from '../components/AuthScreenBackground';
+import { FIREBASE_AUTH } from '../../Firebase';
 
 const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => {
-  const handleLoginPress = (values: any) => {
+  const handleLoginPress = () => {
+    signIn();
     navigation.navigate('Home');
   };
 
@@ -30,8 +33,20 @@ const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => 
       password: '',
     },
     validationSchema: validationSchema,
-    onSubmit: submitValues => handleLoginPress(submitValues),
+    onSubmit: submitValues => handleLoginPress(),
   });
+
+  const signIn = async () => {
+    try {
+      const response = await signInWithEmailAndPassword(FIREBASE_AUTH, values.email, values.password);
+      if (response) {
+        navigation.navigate('Home');
+      }
+    } catch (err) { 
+      console.log('Error: ' + err)
+      Alert.alert('SignIn failed', 'Could not sign in. Try again later');
+    }
+  }
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -63,7 +78,7 @@ const LoginScreen = ({ navigation }: { navigation: any }): React.JSX.Element => 
             iconName=""
             iconType=""
             buttonText="Sign In"
-            handleButtonPress={() => (isValid ? handleLoginPress(values) : console.log('Error'))}
+            handleButtonPress={() => (isValid && signIn())}
           />
 
           <CustomizedLink
