@@ -4,7 +4,7 @@ import { PRODUCTS_BASE_API_URL } from '@env';
 export const categoriesApi = createApi({
   reducerPath: 'categoriesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: PRODUCTS_BASE_API_URL,
+    baseUrl: 'https://fakestoreapi.com',
   }),
   endpoints: builder => ({
     getAllCategories: builder.query<any, void>({
